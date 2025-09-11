@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: notification-service
+  datasource:
+    url:  jdbc:postgresql://localhost:5432/notificationdb
+    username: postgres
+    password:  Welcome@1234
+    driver-class-name: org.postgresql.Driver
+    #  datasource:
+    #    url: jdbc:h2:mem:testdb
+    #    username: sa
+    #    password:
+    #    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:29092
+      group-id: notification-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+  mail:
+    host: smtp.gmail.com        # or your SMTP host
+    port: 587                   # 465 for SSL, 587 for TLS
+    username: 
+    password:    # Gmail requires App Password, not your real password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+app:
+  kafka:
+    topic: task-events
+
+twilio:
+  accountSid: AC71684e3e42c88c8efaefb5d5cfbe6ac9
+  authToken: 887ca625851b8ed262b2a36b006d8021
+  fromNumber: +16812545959
+  whatsappFrom: +14155238886
+
+# spring.mail.* configure for production mail host
+server:
+  port: 8087
