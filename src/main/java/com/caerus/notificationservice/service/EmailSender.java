@@ -10,16 +10,17 @@ public class EmailSender implements Sender {
 
     @Autowired(required = false)
     private JavaMailSender mailSender;
+      
 
-    @Override
-    public void send(String to, String message) throws Exception {
-        if (mailSender == null) {
-            throw new IllegalStateException("JavaMailSender not configured");
-        }
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(to);
-        mail.setSubject("Notification");
-        mail.setText(message);
-        mailSender.send(mail);
-    }
+
+	@Override
+	public void send(String to, String subject, String msg) throws Exception {
+		SimpleMailMessage message = new SimpleMailMessage(); 
+        //message.setFrom();
+        message.setTo(to); 
+        message.setSubject(subject); 
+        message.setText(msg);
+        mailSender.send(message);
+		
+	}
 }
