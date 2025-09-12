@@ -13,14 +13,16 @@ public class WhatsAppSender implements Sender {
         this.twilioService = twilioService;
     }
 
-    @Override
-    public void send(String to, String subject, String message) throws Exception {
-        try {
-            Message m = twilioService.sendWhatsApp(to, message);
-            System.out.println("[WhatsApp] sid=" + m.getSid());
-        } catch (ApiException e) {
-            System.err.println("Twilio API error: " + e.getMessage());
-            throw e;
-        }
-    }
+	@Override
+	public void send(String to, String subject, String message) throws Exception {
+		try {
+			Message m = twilioService.sendWhatsApp(to, message);
+			System.out.println("[WhatsApp] sid=" + m.getSid());
+		} catch (ApiException e) {
+			System.err.println("Twilio API error: " + e.getMessage());
+			throw e;
+		}		
+	}
+
+    
 }
