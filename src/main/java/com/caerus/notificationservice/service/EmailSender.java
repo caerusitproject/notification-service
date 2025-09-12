@@ -16,7 +16,6 @@ public class EmailSender implements Sender {
 	@Override
 	public void send(String to, String subject, String msg) throws Exception {
 		SimpleMailMessage message = new SimpleMailMessage(); 
-        //message.setFrom();
         message.setTo(to); 
         message.setSubject(subject); 
         message.setText(msg);
