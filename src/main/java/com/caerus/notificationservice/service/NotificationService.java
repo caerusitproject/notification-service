@@ -73,16 +73,17 @@ public class NotificationService {
             switch (req.getChannel()) {
                 case EMAIL -> {
                     if (email == null) throw new IllegalStateException("Email missing");
-                    //emailSender.send(email, req.getContent());
+                    //
                     System.out.println("Sending email to: " + email);
+                    emailSender.send(email, req.getSubject(),req.getContent());
                 }
                 case SMS -> {
                     if (phone == null) throw new IllegalStateException("Phone missing");
-                    smsSender.send(phone, req.getContent());
+                    smsSender.send(phone,null, req.getContent());
                 }
                 case WHATSAPP -> {
                     if (phone == null) throw new IllegalStateException("Phone missing");
-                    whatsAppSender.send(phone, req.getContent());
+                    whatsAppSender.send(phone,null, req.getContent());
                 }
                 case IN_APP -> {
                     // no-op placeholder
@@ -111,14 +112,14 @@ public class NotificationService {
         requestBody.put("subject", subject);
         requestBody.put("message", message);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        try {
+			emailSender.send(requestBody.get("to"), requestBody.get("subject"), requestBody.get("message"));
+		} catch (Exception e) {
+			System.err.println("❌ Failed to send email to: " + to);
+			e.printStackTrace();
+		}
 
-        HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody, headers);
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-
-        return response.getBody();
+        return "Mail send processed";
     }
     
     //Read data from kafka and save to DB
