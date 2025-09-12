@@ -14,7 +14,7 @@ public class SmsSender implements Sender {
     }
 
     @Override
-    public void send(String to, String message) throws Exception {
+    public void send(String to, String subject, String message) throws Exception {
         try {
             Message m = twilioService.sendSms(to, message);
             System.out.println("[SMS] sid=" + m.getSid());
