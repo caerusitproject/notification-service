@@ -14,7 +14,7 @@ public class WhatsAppSender implements Sender {
     }
 
     @Override
-    public void send(String to, String message) throws Exception {
+    public void send(String to, String subject, String message) throws Exception {
         try {
             Message m = twilioService.sendWhatsApp(to, message);
             System.out.println("[WhatsApp] sid=" + m.getSid());
