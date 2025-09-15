@@ -134,13 +134,13 @@ public class NotificationService {
 			SendRequest sendRequest = new SendRequest();
 			sendRequest.setSubject(notification.getSubject());
 			sendRequest.setContent(notification.getMessage());
-			sendRequest.setChannel(Channel.EMAIL);
+			sendRequest.setChannel(Channel.WHATSAPP);
 			sendRequest.setUserId(notification.getUserId());
 			prefOpt = preferenceRepository.findById(sendRequest.getUserId());
 			if(!prefOpt.isPresent()) {
 				
 				UserPreference userPreference = new UserPreference();
-				userPreference.setUserId(sendRequest.getUserId());
+				//userPreference.setUserId(sendRequest.getUserId());
 				userPreference.setEmail(notification.getEmail());
 				userPreference.setPhone(notification.getPhoneNumber());
 				userPreference.setWhatsappNumber(notification.getWhatsappNumber());

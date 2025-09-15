@@ -13,6 +13,7 @@ public class UserEventDTO {
 	    private String message;
 	    private String phoneNumber;
 	    private String whatsappNumber;
+	    private String eventType;
 
     // Getters and Setters
 }
