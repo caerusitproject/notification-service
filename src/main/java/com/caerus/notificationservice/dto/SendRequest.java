@@ -21,6 +21,8 @@ public class SendRequest {
     private Channel channel;
     @NotBlank
     private String content;
+    private String email; // Optional, used for email
+    private String fullName; // Optional, used for personalization
 	private String subject; // Optional, used for email
 	private String phoneNumber; // Optional, used for SMS and WhatsApp
 	private String templateName;
