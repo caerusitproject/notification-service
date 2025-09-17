@@ -5,6 +5,7 @@ services:
     hostname: zookeeper
     ports:
       - "2181:2181"
+	  -	"22181:22181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -14,7 +15,7 @@ services:
     hostname: kafka
     ports:
       - "9092:9092"
-      - "9093:9093" # For internal communication if needed
+      - "29092:29092" # For internal communication if needed
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
