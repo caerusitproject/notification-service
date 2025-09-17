@@ -1,4 +1,4 @@
-package com.caerus.notificationservice.controller;
+package com.caerus.notificationservice.api;
 
 import java.util.List;
 import java.util.Optional;
