@@ -22,7 +22,7 @@ public class NotificationDataProvider {
         Map<String, Object> data = new HashMap<>();
 
         switch (eventName) {
-            case "USER_CREATED" -> {
+            case "USER_REGISTERED" -> {
                 UserResponse user = userServiceClient.getUserById(entityId);
                 data.put("name", user.name());
                 data.put("username", user.username());
