@@ -1,5 +1,6 @@
-package com.caerus.notificationservice.controller;
+package com.caerus.notificationservice.api;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,12 +37,15 @@ public class NotificationTemplateConrtroller {
     
     @PostMapping("/upload-template")
     public ResponseEntity<NotificationTemplate> uploadTemplate(
-            @RequestParam("name") String name,
-            @RequestParam(value = "description", required = false) String description,
-            @RequestParam("file") MultipartFile file) {
+    		@RequestParam("file") MultipartFile file,
+            @RequestParam("templateName") String templateName,
+            @RequestParam("type") String type,
+            @RequestParam("notificationType") String notificationType,
+            @RequestParam("subject") String subject,
+            @RequestParam("eventType") String eventType) throws IOException {
 
         try {
-        	NotificationTemplate savedTemplate = templateService.uploadTemplateFile(name, description, file);
+        	NotificationTemplate savedTemplate = templateService.uploadTemplateFile(templateName,type,notificationType,subject,eventType, file);
             return ResponseEntity.ok(savedTemplate);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

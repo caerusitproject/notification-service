@@ -1,5 +1,7 @@
 package com.caerus.notificationservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
@@ -29,6 +31,7 @@ public class NotificationTemplate {
     private String EventType; // e.g., USER_REGISTRATION, FORGOT_PASSWORD`
 
     @Column(nullable = true, length = 2000)
+    @JsonIgnore
     private String content; // template content with placeholders
     
     @Column(nullable = true)
