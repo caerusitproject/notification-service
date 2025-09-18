@@ -1,6 +1,9 @@
 package com.caerus.notificationservice.service;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.caerus.notificationservice.model.Channel;
 import com.caerus.notificationservice.model.NotificationTemplate;
 import com.caerus.notificationservice.repo.NotificationTemplateRepository;
+import com.caerus.notificationservice.util.FileUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +28,7 @@ public class NotificationTemplateService {
 	private static final Logger logger = LoggerFactory.getLogger(NotificationTemplateService.class);
 
     private final NotificationTemplateRepository templateRepository;
+    public final FileUtil fileUtil;
     
     @Value("${file.upload-dir}")
     private String TEMPLATE_FOLDER;
@@ -37,7 +42,7 @@ public class NotificationTemplateService {
         if (templateRepository.existsByTemplateName(template.getTemplateName())) {
 			throw new IllegalArgumentException("Template with name " + template.getTemplateName() + " already exists.");
 		}
-
+       
         NotificationTemplate nTemplate = NotificationTemplate.builder()
         		.templateName(template.getTemplateName())
 				.type(template.getType())
@@ -93,8 +98,8 @@ public class NotificationTemplateService {
 	
 	//uplode template file and save to db 
 	//TODO
-	public NotificationTemplate uploadTemplateFile(String name, String description, MultipartFile file) throws Exception {
-		if (templateRepository.existsByTemplateName(name)) {
+	public NotificationTemplate uploadTemplateFile(String templateName, String type,String notificationType,String subject,String eventType, MultipartFile file) throws Exception {
+		if (templateRepository.existsByTemplateName(templateName)) {
             throw new RuntimeException("Template with this name already exists!");
         }
         // read file content
@@ -106,14 +111,20 @@ public class NotificationTemplateService {
         
         // Save file in resources/email-template
         String filePath = TEMPLATE_FOLDER + file.getOriginalFilename();
-        File savedFile = new File(filePath);
-        file.transferTo(savedFile);
-
+        Path fileLocation = Paths.get(TEMPLATE_FOLDER + file.getOriginalFilename());
+        Files.write(fileLocation, file.getBytes());
+        //.write(filePath, file.getBytes());
+        String content = FileUtil.readFileFromResources(TEMPLATE_FOLDER, file.getOriginalFilename());
         // Save record in DB
         NotificationTemplate template = NotificationTemplate.builder()
-                .templateName(name)
+                .templateName(templateName)
                 .filePath(filePath)
-                .description(description)
+                .type(type)
+                .notificationType(notificationType)
+                .EventType(eventType)
+                .subject(subject)
+                .content(content)
+                .contentType("HTML")
                 .build();
 
 		return templateRepository.save(template);
