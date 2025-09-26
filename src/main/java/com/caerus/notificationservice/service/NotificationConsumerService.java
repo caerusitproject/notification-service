@@ -3,8 +3,8 @@ package com.caerus.notificationservice.service;
 import org.springframework.stereotype.Service;
 
 import com.caerus.notificationservice.dto.NotificationMessage;
-import com.caerus.notificationservice.model.Channel;
-import com.caerus.notificationservice.model.Notification;
+import com.caerus.notificationservice.enums.Channel;
+import com.caerus.notificationservice.entity.Notification;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service("notificationConsumerService")

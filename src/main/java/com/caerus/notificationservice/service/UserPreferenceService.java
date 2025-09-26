@@ -3,8 +3,8 @@ package com.caerus.notificationservice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.caerus.notificationservice.model.UserPreference;
-import com.caerus.notificationservice.repo.UserPreferenceRepository;
+import com.caerus.notificationservice.entity.UserPreference;
+import com.caerus.notificationservice.repository.UserPreferenceRepository;
 
 @Service
 public class UserPreferenceService {

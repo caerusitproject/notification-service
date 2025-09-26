@@ -1,4 +1,4 @@
-package com.caerus.notificationservice.api;
+package com.caerus.notificationservice.controller;
 
 
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.caerus.notificationservice.model.UserPreference;
+import com.caerus.notificationservice.entity.UserPreference;
 import com.caerus.notificationservice.service.UserPreferenceService;
 @RestController
 @RequestMapping("/api/user-preferences")

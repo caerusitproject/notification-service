@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.caerus.notificationservice.model.Channel;
-import com.caerus.notificationservice.model.NotificationTemplate;
-import com.caerus.notificationservice.repo.NotificationTemplateRepository;
+import com.caerus.notificationservice.enums.Channel;
+import com.caerus.notificationservice.entity.NotificationTemplate;
+import com.caerus.notificationservice.repository.NotificationTemplateRepository;
 import com.caerus.notificationservice.util.FileUtil;
 
 import lombok.RequiredArgsConstructor;

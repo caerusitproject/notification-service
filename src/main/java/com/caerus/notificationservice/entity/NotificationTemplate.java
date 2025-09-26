@@ -1,4 +1,4 @@
-package com.caerus.notificationservice.model;
+package com.caerus.notificationservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

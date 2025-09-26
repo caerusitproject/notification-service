@@ -1,11 +1,10 @@
-package com.caerus.notificationservice.repo;
+package com.caerus.notificationservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.caerus.notificationservice.model.UserPreference;
+import com.caerus.notificationservice.entity.UserPreference;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface UserPreferenceRepository extends JpaRepository<UserPreference, Long> {
 	
