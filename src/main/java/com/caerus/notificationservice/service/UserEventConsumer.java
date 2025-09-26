@@ -6,9 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.caerus.notificationservice.dto.NotificationMessage;
 import com.caerus.notificationservice.dto.UserEventDTO;
-import com.caerus.notificationservice.model.UserPreference;
-import com.caerus.notificationservice.repo.UserPreferenceRepository;
-import com.caerus.notificationservice.util.UserMapper;
+import com.caerus.notificationservice.entity.UserPreference;
+import com.caerus.notificationservice.repository.UserPreferenceRepository;
 
 @Service
 public class UserEventConsumer {
@@ -19,7 +18,7 @@ public class UserEventConsumer {
         this.userRepository = userRepository;
     }
 
-    @KafkaListener(topics = "${app.kafka.topic.notification}", groupId = "${spring.application.name}")
+    @KafkaListener(topics = "${app.kafka.topic.user-registered}", groupId = "${spring.application.name}")
     public void consume(NotificationMessage eventMessage) {
         System.out.println("📩 Received Kafka Event: " + eventMessage);
         

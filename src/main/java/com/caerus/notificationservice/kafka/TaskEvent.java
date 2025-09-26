@@ -1,8 +1,5 @@
 package com.caerus.notificationservice.kafka;
 
-import com.caerus.notificationservice.dto.SendRequest;
-import com.caerus.notificationservice.model.Channel;
-
 import lombok.*;
 
 @Getter

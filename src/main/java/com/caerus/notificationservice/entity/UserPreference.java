@@ -1,6 +1,4 @@
-package com.caerus.notificationservice.model;
-
-import java.time.Instant;
+package com.caerus.notificationservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

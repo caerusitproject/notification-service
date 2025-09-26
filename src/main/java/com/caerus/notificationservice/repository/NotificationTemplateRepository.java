@@ -1,11 +1,11 @@
-package com.caerus.notificationservice.repo;
+package com.caerus.notificationservice.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.caerus.notificationservice.model.NotificationTemplate;
+import com.caerus.notificationservice.entity.NotificationTemplate;
 @Repository
 public interface NotificationTemplateRepository extends JpaRepository<NotificationTemplate, Long> {
 

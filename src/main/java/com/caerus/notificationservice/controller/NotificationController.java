@@ -1,34 +1,26 @@
-package com.caerus.notificationservice.api;
+package com.caerus.notificationservice.controller;
 
 import jakarta.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import com.caerus.notificationservice.dto.SendRequest;
-import com.caerus.notificationservice.model.Notification;
-import com.caerus.notificationservice.repo.NotificationRepository;
+import com.caerus.notificationservice.entity.Notification;
+import com.caerus.notificationservice.repository.NotificationRepository;
 import com.caerus.notificationservice.service.NotificationService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/notifications")
+@RequestMapping("/api/v1/notifications")
+@RequiredArgsConstructor
 public class NotificationController {
-	
-	@Autowired
-	RestTemplate restTemplate;
 
     private final NotificationService service;
     private final NotificationRepository repo;
 
-    public NotificationController(NotificationService service, NotificationRepository repo) {
-        this.service = service;
-        this.repo = repo;
-    }
-
-    @PostMapping("/send")
+    @PostMapping
     public Notification send(@Valid @RequestBody SendRequest req) {
         return service.send(req);
     }
