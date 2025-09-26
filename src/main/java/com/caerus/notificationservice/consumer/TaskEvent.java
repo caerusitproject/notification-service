@@ -1,4 +1,4 @@
-package com.caerus.notificationservice.kafka;
+package com.caerus.notificationservice.consumer;
 
 import lombok.*;
 

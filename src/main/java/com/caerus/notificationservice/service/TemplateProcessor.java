@@ -15,7 +15,7 @@ public class TemplateProcessor {
 	 /**
 	     * Process template by replacing placeholders with actual values.
 	     *
-	     * @param template Template string with placeholders like {{name}}
+	     * @param template Template string with placeholders like {{fullName}}
 	     * @param values   Key-value map of placeholders
 	     * @return Processed template
 	     */
