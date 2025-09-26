@@ -58,8 +58,8 @@ public class NotificationTemplateConrtroller {
         return ResponseEntity.ok(templateService.getAllTemplates());
     }
 
-    // Get template by name and type
-       @GetMapping("/{name}/{type}")
+    // Get template by fullName and type
+       @GetMapping("/{fullName}/{type}")
        public ResponseEntity<NotificationTemplate> getTemplateByNameAndType(
             @PathVariable String name,
             @PathVariable String type) {
@@ -72,7 +72,7 @@ public class NotificationTemplateConrtroller {
                 .orElse(ResponseEntity.notFound().build()).getBody());
        }
     
-    // Get template by name and type
+    // Get template by fullName and type
     @GetMapping("/{notificationType}")
     public ResponseEntity<NotificationTemplate> getTemplateByNotificationType(
             @PathVariable String NotificationType) {
