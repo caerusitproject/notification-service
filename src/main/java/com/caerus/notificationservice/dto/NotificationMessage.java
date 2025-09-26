@@ -19,6 +19,4 @@ public class NotificationMessage {
     private String phoneNumber;
     private String whatsappNumber;
     private String channel;
-
-    
 }

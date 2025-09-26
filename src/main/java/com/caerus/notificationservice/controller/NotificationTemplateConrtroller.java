@@ -1,4 +1,4 @@
-package com.caerus.notificationservice.api;
+package com.caerus.notificationservice.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.caerus.notificationservice.model.NotificationTemplate;
+import com.caerus.notificationservice.entity.NotificationTemplate;
 import com.caerus.notificationservice.service.NotificationTemplateService;
 
 import lombok.RequiredArgsConstructor;

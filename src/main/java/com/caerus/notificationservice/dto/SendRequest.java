@@ -2,7 +2,7 @@ package com.caerus.notificationservice.dto;
 
 import java.util.Map;
 
-import com.caerus.notificationservice.model.Channel;
+import com.caerus.notificationservice.enums.Channel;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
