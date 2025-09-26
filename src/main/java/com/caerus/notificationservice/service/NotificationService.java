@@ -6,35 +6,27 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import com.caerus.notificationservice.dto.NotificationMessage;
 import com.caerus.notificationservice.dto.SendRequest;
-import com.caerus.notificationservice.model.Channel;
-import com.caerus.notificationservice.model.Notification;
-import com.caerus.notificationservice.model.NotificationTemplate;
-import com.caerus.notificationservice.model.Status;
-import com.caerus.notificationservice.model.UserPreference;
+import com.caerus.notificationservice.enums.Channel;
+import com.caerus.notificationservice.entity.Notification;
+import com.caerus.notificationservice.entity.NotificationTemplate;
+import com.caerus.notificationservice.enums.Status;
+import com.caerus.notificationservice.entity.UserPreference;
 import com.caerus.notificationservice.processor.NotificationDataProvider;
-import com.caerus.notificationservice.repo.NotificationRepository;
-import com.caerus.notificationservice.repo.NotificationTemplateRepository;
-import com.caerus.notificationservice.repo.UserPreferenceRepository;
+import com.caerus.notificationservice.repository.NotificationRepository;
+import com.caerus.notificationservice.repository.UserPreferenceRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
-
-	@Autowired
-	private RestTemplate restTemplate;
 
 	private final NotificationRepository notificationRepository;
 	private final TemplateProcessor templateProcessor;

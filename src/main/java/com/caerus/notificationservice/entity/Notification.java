@@ -1,5 +1,7 @@
-package com.caerus.notificationservice.model;
+package com.caerus.notificationservice.entity;
 
+import com.caerus.notificationservice.enums.Channel;
+import com.caerus.notificationservice.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 

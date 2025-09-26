@@ -1,7 +1,7 @@
 package com.caerus.notificationservice.util;
 
 import com.caerus.notificationservice.dto.UserEventDTO;
-import com.caerus.notificationservice.model.UserPreference;
+import com.caerus.notificationservice.entity.UserPreference;
 
 public class UserMapper {
 
