@@ -22,7 +22,7 @@ public class NotificationTemplate {
     private String type; // EMAIL, SMS, WHATSAPP
 
     @Column(nullable = false)
-    private String templateName; // unique template name
+    private String templateName; // unique template fullName
     
     @Column(nullable = false)
     private String notificationType; // e.g., WELCOME, PASSWORD_RESET

@@ -40,7 +40,7 @@ public class NotificationTemplateService {
     
     public NotificationTemplate saveTemplate(NotificationTemplate template) {
         if (templateRepository.existsByTemplateName(template.getTemplateName())) {
-			throw new IllegalArgumentException("Template with name " + template.getTemplateName() + " already exists.");
+			throw new IllegalArgumentException("Template with fullName " + template.getTemplateName() + " already exists.");
 		}
        
         NotificationTemplate nTemplate = NotificationTemplate.builder()
@@ -85,7 +85,7 @@ public class NotificationTemplateService {
 		 		
 		return templateRepository.findByTemplateNameAndType(templateName, templateType)
 				.orElseThrow(() -> new IllegalArgumentException(
-						"Template not found with name: " + templateName + " and type: " + templateType));
+						"Template not found with fullName: " + templateName + " and type: " + templateType));
 	}
 	
 	public NotificationTemplate getTemplateByEventType(String eventtype, Channel channel) {
@@ -100,7 +100,7 @@ public class NotificationTemplateService {
 	//TODO
 	public NotificationTemplate uploadTemplateFile(String templateName, String type,String notificationType,String subject,String eventType, MultipartFile file) throws Exception {
 		if (templateRepository.existsByTemplateName(templateName)) {
-            throw new RuntimeException("Template with this name already exists!");
+            throw new RuntimeException("Template with this fullName already exists!");
         }
         // read file content
 		File folder = new File(TEMPLATE_FOLDER);

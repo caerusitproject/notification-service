@@ -9,7 +9,7 @@ import com.caerus.notificationservice.entity.NotificationTemplate;
 @Repository
 public interface NotificationTemplateRepository extends JpaRepository<NotificationTemplate, Long> {
 
-   // Optional<NotificationTemplate> findByNameAndType(String name, String type);
+   // Optional<NotificationTemplate> findByNameAndType(String fullName, String type);
    // Optional<NotificationTemplate> findByNotificationType(String nnotificationTypeame);
 	  Optional<NotificationTemplate> findByTemplateNameAndType(String templateName, String type);
 	 
