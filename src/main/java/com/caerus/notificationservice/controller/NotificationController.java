@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.caerus.notificationservice.dto.SendRequest;
 import com.caerus.notificationservice.entity.Notification;
 import com.caerus.notificationservice.repository.NotificationRepository;
-import com.caerus.notificationservice.service.NotificationService;
+import com.caerus.notificationservice.service.NotificationServiceOld;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotificationController {
 
-    private final NotificationService service;
+    private final NotificationServiceOld service;
     private final NotificationRepository repo;
 
     @PostMapping

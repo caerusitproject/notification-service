@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.caerus.notificationservice.dto.UserResponse;
 
-//@FeignClient(name = "user-service", url = "${user.service.url}")
+//@FeignClient(fullName = "user-service", url = "${user.service.url}")
 public interface UserServiceClient {
 
     @GetMapping("/api/v1/users/{id}")

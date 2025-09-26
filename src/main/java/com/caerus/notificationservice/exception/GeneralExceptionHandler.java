@@ -46,8 +46,14 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorResponse> handleAllException(Exception exception, HttpServletRequest request) {
-        log.error("BadRequestException: {}", exception.getMessage());
-        return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, request);
+        log.error("Something went wrong: {}", exception.getMessage());
+        return buildErrorResponse(exception, HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
+    @ExceptionHandler(NotificationDeliveryException.class)
+    public ResponseEntity<ErrorResponse> handleNotificationDelivery(NotificationDeliveryException ex, HttpServletRequest request) {
+        log.error("Email delivery failed: {}", ex.getMessage());
+        return buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     @ExceptionHandler(NotFoundException.class)
