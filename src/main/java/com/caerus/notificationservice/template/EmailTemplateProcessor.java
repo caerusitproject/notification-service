@@ -1,5 +1,6 @@
 package com.caerus.notificationservice.template;
 
+import com.caerus.notificationservice.enums.EmailTemplateType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;

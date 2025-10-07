@@ -2,10 +2,9 @@ package com.caerus.notificationservice.consumer;
 
 import com.caerus.notificationservice.config.KafkaTopicsProperties;
 import com.caerus.notificationservice.dto.NotificationEvent;
-import com.caerus.notificationservice.service.NotificationService;
+import com.caerus.notificationservice.service.NotificationOrchestratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -14,13 +13,18 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class NotificationEventConsumer {
 
-    private final NotificationService notificationService;
+    private final NotificationOrchestratorService orchestratorService;
     private final KafkaTopicsProperties topics;
 
-    @KafkaListener(topics = "#{@kafkaTopicsProperties.userRegistered}",
+    @KafkaListener(topics = "#{@kafkaTopicsProperties.notificationEvents}",
             groupId = "${spring.kafka.consumer.group-id}")
     public void consume(NotificationEvent event){
         log.info("Received notification event: {}", event);
-        notificationService.sendNotification(event);
+        try{
+            orchestratorService.processEvent(event);
+        } catch (Exception e) {
+            log.error("Failed to process notification event: {}", e.getMessage(), e);
+            // Optionally send to Dead Letter Queue here
+        }
     }
 }
