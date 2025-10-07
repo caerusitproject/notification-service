@@ -1,4 +1,4 @@
-package com.caerus.notificationservice.template;
+package com.caerus.notificationservice.enums;
 
 public enum EmailTemplateType {
     USER_REGISTRATION("user-registration"),

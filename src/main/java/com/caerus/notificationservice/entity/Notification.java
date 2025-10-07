@@ -13,10 +13,10 @@ import java.time.Instant;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class Notification {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -28,20 +28,19 @@ public class Notification {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.PENDING;
+    private Status status;
     
     @Column(nullable = false)
-    private String recipient; // email, phone number, etc.
-    @Column(columnDefinition = "text")
+    private String recipient;
+
     private String subject;
+
 
     @Column(columnDefinition = "text")
     private String content;
 
-    private int retries = 0;
-
-    private Instant createdAt = Instant.now();
+    private int retries;
+    private Instant createdAt;
     private Instant sentAt;
-
     
 }
