@@ -23,7 +23,7 @@ public class EmailNotificationService implements NotificationService{
     private final EmailTemplateProcessor templateProcessor;
 
     @Override
-    public String sendNotificationAndGetHtml(NotificationEvent event) {
+    public String sendNotificationAndGetContent(NotificationEvent event) {
         try {
             EmailTemplateType type = resolveTemplate(event.eventType());
             Map<String, Object> variables = buildTemplateVariables(event, type);
