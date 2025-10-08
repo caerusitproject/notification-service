@@ -6,6 +6,7 @@ import com.caerus.notificationservice.service.NotificationOrchestratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,7 @@ public class NotificationEventConsumer {
 
     private final NotificationOrchestratorService orchestratorService;
     private final KafkaTopicsProperties topics;
+    private final KafkaTemplate<String, NotificationEvent> kafkaTemplate;
 
     @KafkaListener(topics = "#{@kafkaTopicsProperties.notificationEvents}",
             groupId = "${spring.kafka.consumer.group-id}")
@@ -24,7 +26,16 @@ public class NotificationEventConsumer {
             orchestratorService.processEvent(event);
         } catch (Exception e) {
             log.error("Failed to process notification event: {}", e.getMessage(), e);
-            // Optionally send to Dead Letter Queue here
+            sendToDeadLetterQueue(event, e);
+        }
+    }
+
+    private void sendToDeadLetterQueue(NotificationEvent event, Exception e) {
+        try {
+            kafkaTemplate.send(topics.getNotificationEventsDlq(), event);
+            log.warn("Event sent to DLQ: {}", event);
+        } catch (Exception ex) {
+            log.error("Failed to send event to DLQ: {}", ex.getMessage(), ex);
         }
     }
 }

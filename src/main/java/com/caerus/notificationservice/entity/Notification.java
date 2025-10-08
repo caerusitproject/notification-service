@@ -22,6 +22,8 @@ public class Notification {
     @Column(nullable = false)
     private Long userId;
 
+    private String fullName;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Channel channel;
@@ -38,6 +40,10 @@ public class Notification {
 
     @Column(columnDefinition = "text")
     private String content;
+
+    @Column(columnDefinition = "text")
+    private String resetLink;
+    private String eventType;
 
     private int retries;
     private Instant createdAt;

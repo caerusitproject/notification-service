@@ -1,5 +1,7 @@
 package com.caerus.notificationservice.dto;
 
+import java.util.List;
+
 public record NotificationEvent(
         Long userId,
         String fullName,
@@ -7,6 +9,7 @@ public record NotificationEvent(
         String email,
         String resetLink,
         String phoneNumber,
-        String whatsappNumber
+        String whatsappNumber,
+        List<String> channels
 ) {
 }
