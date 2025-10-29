@@ -13,34 +13,30 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SmsNotificationService implements NotificationService{
+public class SmsNotificationService implements NotificationService {
 
-    @Value("${twilio.phone-number}")
-    private String fromNumber;
+  @Value("${twilio.phone-number}")
+  private String fromNumber;
 
-    private final MessageTemplateProcessor messageTemplateProcessor;
+  private final MessageTemplateProcessor messageTemplateProcessor;
 
-    @Override
-    public String sendNotificationAndGetContent(NotificationEvent event) {
-        try{
-            String body = messageTemplateProcessor.buildMessage(
-                    event.eventType(),
-                    event.fullName(),
-                    event.resetLink()
-            );
+  @Override
+  public String sendNotificationAndGetContent(NotificationEvent event) {
+    try {
+      String body =
+          messageTemplateProcessor.buildMessage(
+              event.eventType(), event.fullName(), event.resetLink());
 
-            Message message = Message.creator(
-                    new PhoneNumber(event.phoneNumber()),
-                    new PhoneNumber(fromNumber),
-                    body
-            ).create();
+      Message message =
+          Message.creator(new PhoneNumber(event.phoneNumber()), new PhoneNumber(fromNumber), body)
+              .create();
 
-            log.info("SMS sent successfully to {}. SID: {}", event.phoneNumber(), message.getSid());
-            return body;
+      log.info("SMS sent successfully to {}. SID: {}", event.phoneNumber(), message.getSid());
+      return body;
 
-        }catch (Exception e) {
-            log.error("Failed to send SMS to {}: {}", event.phoneNumber(), e.getMessage());
-            throw new NotificationDeliveryException("Failed to send SMS: " + e.getMessage());
-        }
+    } catch (Exception e) {
+      log.error("Failed to send SMS to {}: {}", event.phoneNumber(), e.getMessage());
+      throw new NotificationDeliveryException("Failed to send SMS: " + e.getMessage());
     }
+  }
 }

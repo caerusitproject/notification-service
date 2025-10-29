@@ -14,28 +14,29 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class NotificationEventConsumer {
 
-    private final NotificationOrchestratorService orchestratorService;
-    private final KafkaTopicsProperties topics;
-    private final KafkaTemplate<String, NotificationEvent> kafkaTemplate;
+  private final NotificationOrchestratorService orchestratorService;
+  private final KafkaTopicsProperties topics;
+  private final KafkaTemplate<String, NotificationEvent> kafkaTemplate;
 
-    @KafkaListener(topics = "#{@kafkaTopicsProperties.notificationEvents}",
-            groupId = "${spring.kafka.consumer.group-id}")
-    public void consume(NotificationEvent event){
-        log.info("Received notification event: {}", event);
-        try{
-            orchestratorService.processEvent(event);
-        } catch (Exception e) {
-            log.error("Failed to process notification event: {}", e.getMessage(), e);
-            sendToDeadLetterQueue(event, e);
-        }
+  @KafkaListener(
+      topics = "#{@kafkaTopicsProperties.notificationEvents}",
+      groupId = "${spring.kafka.consumer.group-id}")
+  public void consume(NotificationEvent event) {
+    log.info("Received notification event: {}", event);
+    try {
+      orchestratorService.processEvent(event);
+    } catch (Exception e) {
+      log.error("Failed to process notification event: {}", e.getMessage(), e);
+      sendToDeadLetterQueue(event, e);
     }
+  }
 
-    private void sendToDeadLetterQueue(NotificationEvent event, Exception e) {
-        try {
-            kafkaTemplate.send(topics.getNotificationEventsDlq(), event);
-            log.warn("Event sent to DLQ: {}", event);
-        } catch (Exception ex) {
-            log.error("Failed to send event to DLQ: {}", ex.getMessage(), ex);
-        }
+  private void sendToDeadLetterQueue(NotificationEvent event, Exception e) {
+    try {
+      kafkaTemplate.send(topics.getNotificationEventsDlq(), event);
+      log.warn("Event sent to DLQ: {}", event);
+    } catch (Exception ex) {
+      log.error("Failed to send event to DLQ: {}", ex.getMessage(), ex);
     }
+  }
 }

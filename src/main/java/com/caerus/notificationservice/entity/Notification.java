@@ -3,9 +3,8 @@ package com.caerus.notificationservice.entity;
 import com.caerus.notificationservice.enums.Channel;
 import com.caerus.notificationservice.enums.Status;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.Instant;
+import lombok.*;
 
 @Entity
 @Table(name = "notifications")
@@ -15,38 +14,37 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class Notification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private Long userId;
+  @Column(nullable = false)
+  private Long userId;
 
-    private String fullName;
+  private String fullName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Channel channel;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Channel channel;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Status status;
-    
-    @Column(nullable = false)
-    private String recipient;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Status status;
 
-    private String subject;
+  @Column(nullable = false)
+  private String recipient;
 
+  private String subject;
 
-    @Column(columnDefinition = "text")
-    private String content;
+  @Column(columnDefinition = "text")
+  private String content;
 
-    @Column(columnDefinition = "text")
-    private String resetLink;
-    private String eventType;
+  @Column(columnDefinition = "text")
+  private String resetLink;
 
-    private int retries;
-    private Instant createdAt;
-    private Instant sentAt;
-    
+  private String eventType;
+
+  private int retries;
+  private Instant createdAt;
+  private Instant sentAt;
 }

@@ -1,17 +1,17 @@
 package com.caerus.notificationservice.enums;
 
 public enum EmailTemplateType {
-    USER_REGISTRATION("user-registration"),
-    FORGOT_PASSWORD("forgot-password"),
-    GENERIC_MESSAGE("generic-message");
+  USER_REGISTRATION("user-registration"),
+  FORGOT_PASSWORD("forgot-password"),
+  GENERIC_MESSAGE("generic-message");
 
-    private final String fileName;
+  private final String fileName;
 
-    EmailTemplateType(String fileName) {
-        this.fileName = fileName;
-    }
+  EmailTemplateType(String fileName) {
+    this.fileName = fileName;
+  }
 
-    public String getFileName() {
-        return fileName;
-    }
+  public String getFileName() {
+    return fileName;
+  }
 }

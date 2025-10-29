@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "spring.kafka.topic")
 public class KafkaTopicsProperties {
-    private String notificationEvents;
-    private String notificationEventsDlq;
+  private String notificationEvents;
+  private String notificationEventsDlq;
 }

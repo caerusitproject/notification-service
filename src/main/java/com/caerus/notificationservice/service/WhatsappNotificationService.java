@@ -15,35 +15,30 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class WhatsappNotificationService implements NotificationService {
 
-    @Value("${twilio.whatsapp-from}")
-    private String whatsappFrom;
+  @Value("${twilio.whatsapp-from}")
+  private String whatsappFrom;
 
-    private final MessageTemplateProcessor messageTemplateProcessor;
+  private final MessageTemplateProcessor messageTemplateProcessor;
 
-    @Override
-    public String sendNotificationAndGetContent(NotificationEvent event) {
-        try {
-            String body = messageTemplateProcessor.buildMessage(
-                    event.eventType(),
-                    event.fullName(),
-                    event.resetLink()
-            );
+  @Override
+  public String sendNotificationAndGetContent(NotificationEvent event) {
+    try {
+      String body =
+          messageTemplateProcessor.buildMessage(
+              event.eventType(), event.fullName(), event.resetLink());
 
-            String from = "whatsapp:" + whatsappFrom;
-            String to = "whatsapp:" + event.whatsappNumber();
+      String from = "whatsapp:" + whatsappFrom;
+      String to = "whatsapp:" + event.whatsappNumber();
 
-            Message message = Message.creator(
-                    new PhoneNumber(to),
-                    new PhoneNumber(from),
-                    body
-            ).create();
+      Message message = Message.creator(new PhoneNumber(to), new PhoneNumber(from), body).create();
 
-            log.info("WhatsApp message sent to {}. SID: {}", event.whatsappNumber(), message.getSid());
-            return body;
+      log.info("WhatsApp message sent to {}. SID: {}", event.whatsappNumber(), message.getSid());
+      return body;
 
-        } catch (Exception e) {
-            log.error("Failed to send WhatsApp message to {}: {}", event.whatsappNumber(), e.getMessage());
-            throw new NotificationDeliveryException("Failed to send WhatsApp message: " + e.getMessage());
-        }
+    } catch (Exception e) {
+      log.error(
+          "Failed to send WhatsApp message to {}: {}", event.whatsappNumber(), e.getMessage());
+      throw new NotificationDeliveryException("Failed to send WhatsApp message: " + e.getMessage());
     }
+  }
 }

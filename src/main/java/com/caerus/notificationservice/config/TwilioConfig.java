@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TwilioConfig {
 
-    @Value("${twilio.account-sid}")
-    private String accountSid;
+  @Value("${twilio.account-sid}")
+  private String accountSid;
 
-    @Value("${twilio.auth-token}")
-    private String authToken;
+  @Value("${twilio.auth-token}")
+  private String authToken;
 
-    @PostConstruct
-    public void initTwilio() {
-        if (accountSid != null && !accountSid.isBlank()) {
-            Twilio.init(accountSid, authToken);
-        }
+  @PostConstruct
+  public void initTwilio() {
+    if (accountSid != null && !accountSid.isBlank()) {
+      Twilio.init(accountSid, authToken);
     }
+  }
 }
